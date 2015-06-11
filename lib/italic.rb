@@ -4,13 +4,13 @@ class Italic
   end
 
   def convert_opening_tags
-    @chunk.map do |word|
-      if word[0] == "*"
-        word.sub("*", "<em>")
-      else
-        word
+      @chunk.map do |word|
+        if word[0] == "*" || word[0] == "<"
+          word.sub("*", "<em>")
+        else
+          word
+        end
       end
-    end
   end
 
   def italicize

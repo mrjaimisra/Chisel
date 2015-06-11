@@ -5,6 +5,6 @@ class Paragraph
   end
 
   def to_html
-    "<p>#{@chunk}</p>"
+    "<p>#{@chunk}</p>\n\n"
   end
 end

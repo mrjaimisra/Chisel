@@ -6,7 +6,7 @@ class Chisel
   def initialize
     input = File.read(ARGV[0])
     html = Chiseler.new(input).to_html
-    File.write(ARGV[1], html)
+    File.write(ARGV[1] + '\n', html)
     puts "Converted"
   end
 

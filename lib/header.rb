@@ -6,7 +6,6 @@ class Header
   def to_html
     num = @chunk.count("#")
     @chunk.delete!("#")
-    @chunk[0] = ''
     "<h#{num}>#{@chunk}</h#{num}>\n\n"
   end
 

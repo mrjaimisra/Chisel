@@ -4,8 +4,11 @@ class OrderedList
   end
 
   def format_list
-    @half_tags =
-    @chunk.map {|chunk| "<li>#{chunk[3..-1]}</li>"}
-    "<ol>\n#{@half_tags.join("\n")}\n</ol>"
+    @chunk.map {|chunk|
+      if chunk[0].to_i.class == Fixnum && chunk[1] == "."
+        "<li>#{chunk[3..-1]}</li>"
+      else
+        chunk
+      end}
   end
 end

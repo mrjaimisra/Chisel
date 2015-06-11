@@ -4,9 +4,11 @@ class UnorderedList
   end
 
   def format_list
-    @half_tags = @chunk.map {|chunk|
-      "#{chunk.sub("* ", "<li>")}</li>"}
-    # chunk.sub("* ", "<li>")}
-    "<ul>\n#{@half_tags.join("\n")}\n</ul>"
+    @chunk.map {|chunk|
+      if chunk[0] == "*" && chunk[1] == " "
+        "\n#{chunk.sub("* ", "<li>")}</li>"
+      else
+        chunk
+      end}.join("\n")
   end
 end

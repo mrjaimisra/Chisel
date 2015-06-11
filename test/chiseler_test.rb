@@ -11,44 +11,32 @@ class ChiselerTest < Minitest::Test
 
   def test_it_splits_the_input_into_chunks
     chi = Chiseler.new("hello\n\nhello")
-    chunked_input = chi.chunk("hello\n\nhello")
+    chunked_input = chi.chunks
     assert_equal ["hello", "hello"], chunked_input, "It should split the input into chunks when there are two newlines in a row"
   end
 
-  def test_it_interprets_a_header_chunk_correctly
+  def test_it_converts_a_header_to_html
     chi = Chiseler.new("#hello")
-    header = chi.interpret("#hello")
-    assert_kind_of Header, header
+    header = chi.wrap
+    assert_equal ["<h1>hello</h1>\n\n"], header
   end
 
-  def test_it_interprets_a_paragraph_chunk_correctly
+  def test_it_converts_a_paragraph_to_html
     chi = Chiseler.new("hello")
-    paragraph = chi.interpret("hello")
-    assert_kind_of Paragraph, paragraph
-  end
-
-  def test_it_turns_a_header_to_html
-    chi = Chiseler.new("#hello")
-    html_header = chi.header
-    assert_equal "<h1> hello </h1>", html_header
-  end
-
-  def test_it_turns_a_paragraph_to_html
-    chi = Chiseler.new("hello")
-    html_paragraph = chi.header
-    assert_equal "<p> hello </p>", html_paragraph
+    paragraph = chi.wrap
+    assert_equal ["<p>hello</p>\n\n"], paragraph
   end
 
   def test_it_bolds_text
-    chi = Chiseler.new(" **hello** ")
-    bold_text = chi.halfacize
-    assert_equal "<p> <strong>hello</strong> </p>", bold_text
+    chi = Chiseler.new("**hello**")
+    bold_text = chi.emphasize
+    assert_equal "<p><strong>hello</strong></p>", bold_text
   end
 
   def test_it_italicizes_text
-    chi = Chiseler.new("## *hello*")
+    chi = Chiseler.new("##*hello*")
     bold_text = chi.emphasize
-    assert_equal "<h2> <em>hello</em> </h2>", bold_text
+    assert_equal "<h2><em>hello</em></h2>", bold_text
   end
 
   def it_bolds_and_italicizes_text

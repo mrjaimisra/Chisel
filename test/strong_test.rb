@@ -4,9 +4,10 @@ require '../lib/strong'
 
 class StrongTester < Minitest::Test
 
-  def test_it_exists
-    skip
-
+  def test_it_converts_the_opening_tags
+    i = Strong.new("**bold this**")
+    half_bolded = i.convert_opening_tags
+    assert_equal ["<strong>bold", "this**"], half_bolded
   end
 
   def test_it_converts_a_bolded_string_to_have_html_wrapping_tags
