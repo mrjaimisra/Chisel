@@ -4,13 +4,10 @@ class Header
   end
 
   def to_html
-    num = @chunk.scan("#").count
+    num = @chunk.count("#")
     @chunk.delete!("#")
+    @chunk[0] = ''
     "<h#{num}>#{@chunk}</h#{num}>\n\n"
-  end
-
-  def test
-    chunk[0] == '#'
   end
 
 end

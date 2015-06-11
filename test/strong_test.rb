@@ -10,9 +10,8 @@ class StrongTester < Minitest::Test
   end
 
   def test_it_converts_a_bolded_string_to_have_html_wrapping_tags
-    s = Strong.new("This is a **bolded part of a sentence**
-                   within a **longer* sentence")
-    stronger = s.to_html
+    s = Strong.new("This is a **bolded part of a sentence** within a **longer* sentence")
+    stronger = s.bold
     assert_equal "This is a <strong>bolded part of a sentence</strong> within a <strong>longer* sentence", stronger
   end
 end
